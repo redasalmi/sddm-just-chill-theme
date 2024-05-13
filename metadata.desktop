@@ -1,0 +1,16 @@
+[SddmGreeterTheme]
+Name=Just Chill Theme
+Description=Just Chill Theme
+Author=Reda Salmi
+Copyright=(c) 2024, Reda Salmi
+License=MIT
+Type=sddm-theme
+Version=0.1
+Website=https://github.com/redasalmi/sddm-just-chill-theme
+Screenshot=assets/screenshot.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Email=reda.salmi.elt@gmail.com
+Theme-Id=just-chill-theme
+Theme-API=2.0
