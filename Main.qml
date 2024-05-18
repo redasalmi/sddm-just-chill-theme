@@ -9,6 +9,12 @@ Rectangle {
 
     LayoutMirroring.enabled: Qt.locale().textDirection == Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
+    Component.onCompleted: {
+        if (name.text == "")
+            name.focus = true;
+        else
+            password.focus = true;
+    }
 
     TextConstants {
         id: textConstants
@@ -33,11 +39,12 @@ Rectangle {
         target: sddm
     }
 
-    Image {
+    Background {
         id: background
 
         anchors.fill: parent
-        source: config.background
+        source: Qt.resolvedUrl(config.background)
+        fillMode: Image.PreserveAspectFit
     }
 
     Column {
@@ -47,7 +54,6 @@ Rectangle {
         anchors.bottom: parent.bottom
         width: 500
         height: parent.height
-        clip: true
 
         Rectangle {
             color: "black"
@@ -67,7 +73,7 @@ Rectangle {
                 spacing: 12
 
                 Column {
-                    width: parent.width
+                    width: 320
                     spacing: 4
 
                     Text {
@@ -83,10 +89,11 @@ Rectangle {
                     TextBox {
                         id: name
 
+                        radius: 4
                         width: parent.width
-                        height: 30
+                        height: 36
                         text: userModel.lastUser
-                        font.pixelSize: 14
+                        font.pixelSize: 18
                         KeyNavigation.backtab: rebootButton
                         KeyNavigation.tab: password
                         Keys.onPressed: function(event) {
@@ -116,9 +123,10 @@ Rectangle {
                     PasswordBox {
                         id: password
 
+                        radius: 4
                         width: parent.width
-                        height: 30
-                        font.pixelSize: 14
+                        height: 36
+                        font.pixelSize: 18
                         KeyNavigation.backtab: name
                         KeyNavigation.tab: session
                         Keys.onPressed: function(event) {
@@ -214,36 +222,36 @@ Rectangle {
                 }
 
                 Row {
-                    property int btnWidth: Math.max(loginButton.implicitWidth, shutdownButton.implicitWidth, rebootButton.implicitWidth, 80) + 8
+                    property int btnWidth: 50
 
                     spacing: 4
                     anchors.horizontalCenter: parent.horizontalCenter
 
-                    Button {
+                    ImageButton {
                         id: loginButton
 
-                        text: textConstants.login
                         width: parent.btnWidth
+                        source: Qt.resolvedUrl("assets/login.png")
                         onClicked: sddm.login(name.text, password.text, sessionIndex)
                         KeyNavigation.backtab: layoutBox
                         KeyNavigation.tab: shutdownButton
                     }
 
-                    Button {
+                    ImageButton {
                         id: shutdownButton
 
-                        text: textConstants.shutdown
                         width: parent.btnWidth
+                        source: Qt.resolvedUrl("assets/shutdown.png")
                         onClicked: sddm.powerOff()
                         KeyNavigation.backtab: loginButton
                         KeyNavigation.tab: rebootButton
                     }
 
-                    Button {
+                    ImageButton {
                         id: rebootButton
 
-                        text: textConstants.reboot
                         width: parent.btnWidth
+                        source: Qt.resolvedUrl("assets/reboot.png")
                         onClicked: sddm.reboot()
                         KeyNavigation.backtab: shutdownButton
                         KeyNavigation.tab: name
