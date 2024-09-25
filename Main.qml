@@ -155,7 +155,7 @@ Rectangle {
                             anchors.bottom: parent.bottom
                             font.pixelSize: 18
                             KeyNavigation.backtab: name
-                            KeyNavigation.tab: session
+                            KeyNavigation.tab: login
                             Keys.onPressed: function(event) {
                                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                                     sddm.login(name.text, password.text, sessionIndex);
@@ -184,8 +184,8 @@ Rectangle {
                             borderColor: "white"
                             pressedColor: "white"
                             activeColor: "white"
-                            KeyNavigation.tab: maya_reboot
-                            KeyNavigation.backtab: maya_layout
+                            KeyNavigation.backtab: password
+                            KeyNavigation.tab: suspend
                             onClicked: sddm.login(name.text, password.text, sessionIndex)
                         }
 
@@ -201,6 +201,55 @@ Rectangle {
                 color: "black"
                 width: parent.width
                 height: parent.height * 0.3
+
+                Row {
+                    spacing: 12
+                    width: parent.width
+                    height: parent.height
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    SpButton {
+                        id: suspend
+
+                        width: 120
+                        height: 120
+                        label: textConstants.suspend
+                        labelColor: "#ffffff"
+                        icon: Qt.resolvedUrl("assets/pause.png")
+                        KeyNavigation.backtab: login
+                        KeyNavigation.tab: shutdown
+                        onClicked: sddm.powerOff()
+                    }
+
+                    SpButton {
+                        id: shutdown
+
+                        width: 120
+                        height: 120
+                        label: textConstants.shutdown
+                        labelColor: "#ffffff"
+                        icon: Qt.resolvedUrl("assets/power.png")
+                        KeyNavigation.backtab: reboot
+                        KeyNavigation.tab: maya_session
+                        onClicked: sddm.powerOff()
+                    }
+
+                    SpButton {
+                        id: reboot
+
+                        width: 120
+                        height: 120
+                        label: textConstants.reboot
+                        labelColor: "#ffffff"
+                        icon: Qt.resolvedUrl("assets/reboot.png")
+                        KeyNavigation.backtab: shutdown
+                        // KeyNavigation.tab: maya_session
+                        onClicked: sddm.powerOff()
+                    }
+
+                }
+
             }
 
         }
