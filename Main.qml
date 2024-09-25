@@ -15,10 +15,8 @@ Rectangle {
         else
             password.focus = true;
     }
-
-    TextConstants {
-        id: textConstants
-    }
+    width: 1600
+    height: 900
 
     Connections {
         function onLoginSucceeded() {
@@ -39,6 +37,10 @@ Rectangle {
         target: sddm
     }
 
+    TextConstants {
+        id: textConstants
+    }
+
     Background {
         id: background_image
 
@@ -48,206 +50,190 @@ Rectangle {
     }
 
     Rectangle {
-        id: background_color
-
         color: "black"
         width: 500
         height: parent.height
         anchors.right: parent.right
-        anchors.top: parent.top
+    }
 
-        Grid {
+    Column {
+        spacing: 5
+        width: 500
+        height: parent.height
+        anchors.right: parent.right
+
+        Rectangle {
+            color: "black"
             width: parent.width
-            height: parent.height
-            columns: 1
-            spacing: 6
+            height: parent.height * 0.25
 
             Rectangle {
-                id: clock
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
 
-                color: "black"
-                width: parent.width
-                height: parent.height * 0.2
-
-                Row {
+                SpClock {
                     width: parent.width
                     height: parent.height
-                    y: parent.height * 0.4
+                }
 
-                    SpClock {
+            }
+
+        }
+
+        Rectangle {
+            color: "black"
+            width: parent.width
+            height: parent.height * 0.5
+
+            Column {
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 5
+
+                Rectangle {
+                    width: 300
+                    height: 60
+                    color: "black"
+
+                    Text {
+                        id: lblName
+
+                        color: "white"
                         width: parent.width
-                        height: parent.height
+                        text: textConstants.userName
+                        font.bold: true
+                        font.pixelSize: 12
+                    }
+
+                    TextBox {
+                        id: name
+
+                        radius: 4
+                        width: parent.width
+                        height: 40
+                        anchors.bottom: parent.bottom
+                        text: userModel.lastUser
+                        font.pixelSize: 18
+                        KeyNavigation.backtab: rebootButton
+                        KeyNavigation.tab: password
+                        Keys.onPressed: function(event) {
+                            if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                                sddm.login(name.text, password.text, sessionIndex);
+                                event.accepted = true;
+                            }
+                        }
+                    }
+
+                }
+
+                Rectangle {
+                    width: 300
+                    height: 60
+                    color: "black"
+
+                    Text {
+                        id: lblPassword
+
+                        color: "white"
+                        width: parent.width
+                        text: textConstants.password
+                        font.bold: true
+                        font.pixelSize: 12
+                    }
+
+                    PasswordBox {
+                        id: password
+
+                        radius: 4
+                        width: parent.width
+                        height: 40
+                        anchors.bottom: parent.bottom
+                        font.pixelSize: 18
+                        KeyNavigation.backtab: name
+                        KeyNavigation.tab: login
+                        Keys.onPressed: function(event) {
+                            if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                                sddm.login(name.text, password.text, sessionIndex);
+                                event.accepted = true;
+                            }
+                        }
+                    }
+
+                }
+
+                Rectangle {
+                    width: 300
+                    height: 60
+                    color: "black"
+
+                    Button {
+                        id: login
+
+                        radius: 4
+                        width: parent.width
+                        height: 40
+                        anchors.bottom: parent.bottom
+                        text: textConstants.login
+                        color: "white"
+                        textColor: "black"
+                        borderColor: "white"
+                        pressedColor: "white"
+                        activeColor: "white"
+                        KeyNavigation.backtab: password
+                        KeyNavigation.tab: suspend
+                        onClicked: sddm.login(name.text, password.text, sessionIndex)
                     }
 
                 }
 
             }
 
-            Rectangle {
-                id: form
+        }
 
-                color: "black"
-                width: parent.width
-                height: parent.height * 0.5
+        Rectangle {
+            color: "black"
+            width: parent.width
+            height: parent.height * 0.25
 
-                Column {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                    spacing: 12
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 5
 
-                    Rectangle {
-                        width: 300
-                        height: 60
-                        color: "black"
+                SpButton {
+                    id: suspend_btn
 
-                        Text {
-                            id: lblName
-
-                            color: "white"
-                            width: parent.width
-                            text: textConstants.userName
-                            font.bold: true
-                            font.pixelSize: 12
-                        }
-
-                        TextBox {
-                            id: name
-
-                            radius: 4
-                            width: parent.width
-                            height: 40
-                            anchors.bottom: parent.bottom
-                            text: userModel.lastUser
-                            font.pixelSize: 18
-                            KeyNavigation.backtab: rebootButton
-                            KeyNavigation.tab: password
-                            Keys.onPressed: function(event) {
-                                if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                                    sddm.login(name.text, password.text, sessionIndex);
-                                    event.accepted = true;
-                                }
-                            }
-                        }
-
-                    }
-
-                    Rectangle {
-                        width: 300
-                        height: 60
-                        color: "black"
-
-                        Text {
-                            id: lblPassword
-
-                            color: "white"
-                            width: parent.width
-                            text: textConstants.password
-                            font.bold: true
-                            font.pixelSize: 12
-                        }
-
-                        PasswordBox {
-                            id: password
-
-                            radius: 4
-                            width: parent.width
-                            height: 40
-                            anchors.bottom: parent.bottom
-                            font.pixelSize: 18
-                            KeyNavigation.backtab: name
-                            KeyNavigation.tab: login
-                            Keys.onPressed: function(event) {
-                                if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                                    sddm.login(name.text, password.text, sessionIndex);
-                                    event.accepted = true;
-                                }
-                            }
-                        }
-
-                    }
-
-                    Rectangle {
-                        width: 300
-                        height: 60
-                        color: "black"
-
-                        Button {
-                            id: login
-
-                            radius: 4
-                            width: parent.width
-                            height: 40
-                            anchors.bottom: parent.bottom
-                            text: textConstants.login
-                            color: "white"
-                            textColor: "black"
-                            borderColor: "white"
-                            pressedColor: "white"
-                            activeColor: "white"
-                            KeyNavigation.backtab: password
-                            KeyNavigation.tab: suspend
-                            onClicked: sddm.login(name.text, password.text, sessionIndex)
-                        }
-
-                    }
-
+                    width: 100
+                    height: 100
+                    label: textConstants.suspend
+                    icon: Qt.resolvedUrl("assets/suspend.svg")
+                    KeyNavigation.tab: reboot_btn
+                    KeyNavigation.backtab: login
+                    onClicked: sddm.suspend()
                 }
 
-            }
+                SpButton {
+                    id: reboot_btn
 
-            Rectangle {
-                id: actions
+                    width: 100
+                    height: 100
+                    label: textConstants.reboot
+                    icon: Qt.resolvedUrl("assets/reboot.svg")
+                    KeyNavigation.tab: shutdown_btn
+                    KeyNavigation.backtab: suspend_btn
+                    onClicked: sddm.reboot()
+                }
 
-                color: "black"
-                width: parent.width
-                height: parent.height * 0.3
+                SpButton {
+                    id: shutdown_btn
 
-                Row {
-                    spacing: 12
-                    width: parent.width
-                    height: parent.height
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    SpButton {
-                        id: suspend
-
-                        width: 120
-                        height: 120
-                        label: textConstants.suspend
-                        labelColor: "#ffffff"
-                        icon: Qt.resolvedUrl("assets/pause.png")
-                        KeyNavigation.backtab: login
-                        KeyNavigation.tab: shutdown
-                        onClicked: sddm.powerOff()
-                    }
-
-                    SpButton {
-                        id: shutdown
-
-                        width: 120
-                        height: 120
-                        label: textConstants.shutdown
-                        labelColor: "#ffffff"
-                        icon: Qt.resolvedUrl("assets/power.png")
-                        KeyNavigation.backtab: reboot
-                        KeyNavigation.tab: maya_session
-                        onClicked: sddm.powerOff()
-                    }
-
-                    SpButton {
-                        id: reboot
-
-                        width: 120
-                        height: 120
-                        label: textConstants.reboot
-                        labelColor: "#ffffff"
-                        icon: Qt.resolvedUrl("assets/reboot.png")
-                        KeyNavigation.backtab: shutdown
-                        // KeyNavigation.tab: maya_session
-                        onClicked: sddm.powerOff()
-                    }
-
+                    width: 100
+                    height: 100
+                    label: textConstants.shutdown
+                    icon: Qt.resolvedUrl("assets/shutdown.svg")
+                    KeyNavigation.tab: name
+                    KeyNavigation.backtab: reboot_btn
+                    onClicked: sddm.powerOff()
                 }
 
             }
