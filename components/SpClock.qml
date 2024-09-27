@@ -4,7 +4,7 @@ Item {
     id: sp_clock
 
     property date value: new Date()
-    property color tColor: "white"
+    property color tColor: "#ffffff"
 
     Timer {
         interval: 100

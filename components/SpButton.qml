@@ -1,10 +1,6 @@
 import QtQuick 2.0
 
 Item {
-    // States and associated visual attributes
-    // Behavior on state transitions
-    // Area to react to mouse actions
-
     id: sp_button
 
     property bool enabled: true
