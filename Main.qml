@@ -6,6 +6,10 @@ Rectangle {
     id: container
 
     property int sessionIndex: session.index
+    property color black: "#000000"
+    property color white: "#ffffff"
+    property color red: "#ff0000"
+    property color steelblue: "#4682b4"
 
     LayoutMirroring.enabled: Qt.locale().textDirection == Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
@@ -20,17 +24,17 @@ Rectangle {
 
     Connections {
         function onLoginSucceeded() {
-            errorMessage.color = "steelblue";
+            errorMessage.color = steelblue;
             errorMessage.text = textConstants.loginSucceeded;
         }
 
         function onLoginFailed() {
-            errorMessage.color = "red";
+            errorMessage.color = red;
             errorMessage.text = textConstants.loginFailed;
         }
 
         function onInformationMessage(message) {
-            errorMessage.color = "red";
+            errorMessage.color = red;
             errorMessage.text = message;
         }
 
@@ -50,7 +54,7 @@ Rectangle {
     }
 
     Rectangle {
-        color: "black"
+        color: black
         width: 500
         height: parent.height
         anchors.right: parent.right
@@ -63,7 +67,7 @@ Rectangle {
         anchors.right: parent.right
 
         Rectangle {
-            color: "black"
+            color: black
             width: parent.width
             height: parent.height * 0.25
 
@@ -81,7 +85,7 @@ Rectangle {
         }
 
         Rectangle {
-            color: "black"
+            color: black
             width: parent.width
             height: parent.height * 0.5
 
@@ -93,12 +97,12 @@ Rectangle {
                 Rectangle {
                     width: 300
                     height: 60
-                    color: "black"
+                    color: black
 
                     Text {
                         id: lblName
 
-                        color: "white"
+                        color: white
                         width: parent.width
                         text: textConstants.userName
                         font.bold: true
@@ -129,12 +133,12 @@ Rectangle {
                 Rectangle {
                     width: 300
                     height: 60
-                    color: "black"
+                    color: black
 
                     Text {
                         id: lblPassword
 
-                        color: "white"
+                        color: white
                         width: parent.width
                         text: textConstants.password
                         font.bold: true
@@ -164,7 +168,7 @@ Rectangle {
                 Rectangle {
                     width: 300
                     height: 60
-                    color: "black"
+                    color: black
 
                     Button {
                         id: login
@@ -174,11 +178,11 @@ Rectangle {
                         height: 40
                         anchors.bottom: parent.bottom
                         text: textConstants.login
-                        color: "white"
-                        textColor: "black"
-                        borderColor: "white"
-                        pressedColor: "white"
-                        activeColor: "white"
+                        color: white
+                        textColor: black
+                        borderColor: white
+                        pressedColor: white
+                        activeColor: white
                         KeyNavigation.backtab: password
                         KeyNavigation.tab: suspend
                         onClicked: sddm.login(name.text, password.text, sessionIndex)
@@ -191,7 +195,7 @@ Rectangle {
         }
 
         Rectangle {
-            color: "black"
+            color: black
             width: parent.width
             height: parent.height * 0.25
 
