@@ -13,7 +13,7 @@ A simple theme to log into your computer and just chill
 
 ## Installation
 
-### Manually
+### Clone and copy the theme folder
 
 ```
   git clone https://github.com/redasalmi/sddm-just-chill-theme.git
@@ -21,10 +21,11 @@ A simple theme to log into your computer and just chill
   sudo cp -r sddm-just-chill-theme/ /usr/share/sddm/themes/
 ```
 
-## Configuration
+### Configuration
 
-After copying the theme, you should set it in the `/etc/sddm.conf` or your sddm configuration file to use it with the following command:
+After copying the theme, open you SDDM configuration file and set `sddm-just-chill-theme` as your current theme
 
 ```
-  echo "[Theme]\nCurrent=sddm-just-chill-theme" | sudo tee /etc/sddm.conf
+  [Theme]
+  Current=sddm-just-chill-theme
 ```
