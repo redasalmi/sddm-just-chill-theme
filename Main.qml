@@ -184,7 +184,7 @@ Rectangle {
                         pressedColor: white
                         activeColor: white
                         KeyNavigation.backtab: password
-                        KeyNavigation.tab: suspend
+                        KeyNavigation.tab: session
                         onClicked: sddm.login(name.text, password.text, sessionIndex)
                     }
 
@@ -229,8 +229,8 @@ Rectangle {
                             font.pixelSize: 12
                             arrowIcon: Qt.resolvedUrl("assets/chevron-down.svg")
                             arrowColor: black
-                            KeyNavigation.tab: maya_layout
-                            KeyNavigation.backtab: maya_shutdown
+                            KeyNavigation.tab: suspend_btn
+                            KeyNavigation.backtab: login
                         }
 
                     }
@@ -259,7 +259,7 @@ Rectangle {
                     label: textConstants.suspend
                     icon: Qt.resolvedUrl("assets/suspend.svg")
                     KeyNavigation.tab: reboot_btn
-                    KeyNavigation.backtab: login
+                    KeyNavigation.backtab: session
                     onClicked: sddm.suspend()
                 }
 
