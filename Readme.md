@@ -17,7 +17,6 @@ A simple theme to log into your computer and just chill
 
 ```
   git clone https://github.com/redasalmi/sddm-just-chill-theme.git
-  cd sddm-just-chill-theme/
   sudo cp -r sddm-just-chill-theme/ /usr/share/sddm/themes/
 ```
 
