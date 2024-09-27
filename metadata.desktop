@@ -1,13 +1,13 @@
 [SddmGreeterTheme]
 Name=Just Chill Theme
-Description=Just Chill Theme
+Description=A login SDDM theme to log into your computer in chill mode
 Author=Reda Salmi
 Copyright=(c) 2024, Reda Salmi
 License=MIT
 Type=sddm-theme
 Version=0.1
 Website=https://github.com/redasalmi/sddm-just-chill-theme
-Screenshot=assets/screenshot.png
+Screenshot=assets/preview.png
 MainScript=Main.qml
 ConfigFile=theme.conf
 TranslationsDirectory=translations
