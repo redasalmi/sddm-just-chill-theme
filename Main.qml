@@ -190,6 +190,53 @@ Rectangle {
 
                 }
 
+                Rectangle {
+                    width: 300
+                    height: 24
+                    color: black
+
+                    Row {
+                        width: parent.width
+                        height: parent.height
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: 5
+
+                        Text {
+                            id: session_text
+
+                            horizontalAlignment: Text.AlignLeft
+                            verticalAlignment: Text.AlignVCenter
+                            width: 50
+                            height: parent.height
+                            color: white
+                            text: textConstants.session
+                            font.pixelSize: 12
+                        }
+
+                        ComboBox {
+                            id: session
+
+                            model: sessionModel
+                            index: sessionModel.lastIndex
+                            width: 245
+                            height: parent.height
+                            color: black
+                            borderColor: white
+                            focusColor: white
+                            textColor: white
+                            menuColor: black
+                            font.pixelSize: 12
+                            arrowIcon: Qt.resolvedUrl("assets/chevron-down.svg")
+                            arrowColor: black
+                            KeyNavigation.tab: maya_layout
+                            KeyNavigation.backtab: maya_shutdown
+                        }
+
+                    }
+
+                }
+
             }
 
         }
