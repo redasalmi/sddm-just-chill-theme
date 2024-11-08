@@ -22,7 +22,7 @@ A simple theme to log into your computer and just chill
 
 ### Configuration
 
-After copying the theme, open you SDDM configuration file and set `sddm-just-chill-theme` as your current theme
+After copying the theme, open your SDDM configuration file and set `sddm-just-chill-theme` as your current theme
 
 ```
   [Theme]
